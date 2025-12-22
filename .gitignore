@@ -1,5 +1,5 @@
 # Folders
-Modules/
+/Modules/*
 
 # Files
 Company.Functions.ps1
