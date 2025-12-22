@@ -30,19 +30,6 @@ function clearproj() {
     Get-ChildItem .\ -include bin,obj -Recurse | foreach ($_) { Remove-Item $_.fullname -Force -Recurse }
 }
 
-function report-generate() {
-    $testProj = (Get-Item .).Name.Replace("Api", "Domain.Test")
-    $testProj = ".\src\${testProj}\${testProj}.csproj"
-
-    dotnet build $testProj
-
-    dotnet test $testProj --results-directory .\.dotCover --no-build --collect 'XPlat Code Coverage;Format=opencover' --settings '.\src\CodeCoverage.runsettings' 
-        | ?{ $_ -match 'xml'}
-        | %{ reportgenerator -reports:$_.Trim() -targetdir:'OpenCover' -reporttypes:'Html' }
-
-    Invoke-Expression '.\OpenCover\index.html'
-}
-
 function Remove-HistoryDuplicates {
   $HASH = @{}
   Get-Content (Get-PSReadlineOption).HistorySavePath | ` 

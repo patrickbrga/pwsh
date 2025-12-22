@@ -1,6 +1,5 @@
-Add-Alias vso 'Invoke-Item ./**/*.sln'
+Add-Alias vso 'Invoke-Item (Get-ChildItem -Path . -Recurse -Filter *.sln | Select-Object -First 1)'
 Add-Alias path '(Get-Location).Path'
-Add-Alias prj-lets 'cd ~\git\lets'
 
 Add-Alias st 'git status'
 Add-Alias push 'git push'
@@ -15,9 +14,11 @@ Add-Alias fixup 'git fixup'
 Add-Alias branch 'git branch'
 Add-Alias tag 'git tag'
 Add-Alias up 'git up'
-Add-Alias sync 'git fetch --prune tags ; git pull'
+Add-Alias sync 'git fetch --prune --tags ; git pull'
 
 Add-Alias pub 'bash publish_branch.sh'
+
+(Get-ChildItem -Path ~/git).Name | %{ Add-Alias "prj-$_" "cd ~/git/$_" }
 
 function add {
     if ($args) {
