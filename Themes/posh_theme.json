@@ -33,7 +33,7 @@
           "leading_diamond": "\u256d\u2500[ ",
           "foreground": "p:white",
           "template": "<b>{{ .Path }}</b>",
-          "properties": {
+          "options": {
             "folder_icon": "<p:white>\udb81\udf70 </>",
             "folder_separator_icon": "<p:light_yellow>\ue0b1 </>",
             "home_icon": "\udb80\udedc ",
@@ -46,11 +46,10 @@
           "foreground": "p:light_orange",
           "foreground_templates": [],
           "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }}{{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} <p:light_yellow> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:light_green> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <p:light_gray> {{ .StashCount }}</>{{ end }}",
-          "properties": {
-            "source": "cli",
+          "options": {
             "fetch_status": true,
+            "fetch_push_status": true,
             "fetch_upstream_icon": true,
-            "feach_user": true,
             "branch_icon": " \udb81\ude2c ",
             "branch_ahead_icon": " \udb80\udc5d",
             "branch_behind_icon": " \udb80\udc45",
@@ -74,7 +73,7 @@
           "style": "plain",
           "foreground": "p:light_yellow",
           "template": "\uf252 {{ .FormattedMs }} ",
-          "properties": {
+          "options": {
             "threshold": 10
           }
         },
@@ -85,24 +84,18 @@
           "foreground": "#000000",
           "background": "#ebcc34",
           "template": " ﴱ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
-          "properties": {
+          "options": {
             "context_aliases": {
               "arn:aws:eks:eu-west-1:1234567890:cluster/posh": "posh"
             }
           }
         },
         {
-          "type": "docker",
-          "style": "powerline",
-          "foreground": "p:blue",
-          "template": " \udb82\udc68 {{ .Context }} "
-        },
-        {
           "type": "time",
           "style": "diamond",
           "foreground": "p:white",
           "template": "\udb82\udd54 {{ .CurrentDate | date .Format }}",
-          "properties": {
+          "options": {
             "time_format": "15:04:05"
           }
         },
@@ -129,7 +122,7 @@
           "type": "status",
           "style": "diamond",
           "template": "{{ if .Error }} <p:red>\uea87</> {{ end }}",
-          "properties": {
+          "options": {
             "always_enabled": true
           }
         },
@@ -140,7 +133,7 @@
           "foreground": "#000000",
           "background": "#9ec3f0",
           "template": "  {{ .EnvironmentName }}",
-          "properties": {
+          "options": {
             "source": "pwsh"
           }
         },
@@ -149,7 +142,7 @@
           "style": "powerline",
           "foreground": "p:purple",
           "template": "\ue77f {{ .Full }}",
-          "properties": {
+          "options": {
             "display_mode": "context"
           }
         },
@@ -170,6 +163,12 @@
           "style": "powerline",
           "foreground": "p:light_blue",
           "template": "  {{ .Full }} "
+        },
+        {
+          "type": "docker",
+          "style": "powerline",
+          "foreground": "p:blue",
+          "template": " \udb82\udc68 {{ .Context }} "
         }
       ]
     },
@@ -182,7 +181,7 @@
           "style": "diamond",
           "foreground": "p:light_green",
           "template": "{{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} - {{ .Track }}{{ end }} \udb81\udcc7",
-          "properties": {
+          "options": {
             "playing_icon": "\udb81\udc0a ",
             "paused_icon": "\udb80\udfe4 ",
             "stopped_icon": "\udb81\udcdb "

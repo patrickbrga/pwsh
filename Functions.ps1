@@ -38,3 +38,7 @@ function Remove-HistoryDuplicates {
       $HASH.$_ = 1 } > $env:TMP\PowerShell-History
   Copy-Item $env:TMP\PowerShell-History (Get-PSReadlineOption).HistorySavePath
 }
+
+function nuget-add {
+    Get-ChildItem -Recurse -Filter *.nupkg  | foreach ($_) { nuget add $_.FullName -Source C:\Tools\NugetPackages }
+}
